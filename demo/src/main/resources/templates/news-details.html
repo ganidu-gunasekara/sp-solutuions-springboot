@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>News Details</title>
+</head>
+<body>
+
+<h2 th:text="${newsItem.name}">News Title</h2>
+<p th:text="${newsItem.content}">News Content</p>
+
+<h3>Comments</h3>
+<ul>
+    <li th:each="comment : ${newsItem.comments}">
+        <span th:text="${comment.text}">Comment text</span>
+    </li>
+</ul>
+
+<form th:action="@{'/news/' + ${newsItem.id} + '/comment'}" th:object="${commentDTO}" method="post">
+    <textarea th:field="*{text}" placeholder="Add your comment here..."></textarea><br/>
+    <button type="submit">Submit Comment</button>
+</form>
+
+<a th:href="@{/categories}">Back to Categories</a>
+</body>
+</html>
